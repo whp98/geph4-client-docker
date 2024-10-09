@@ -1,9 +1,9 @@
-FROM rust:bullseye as builder
+FROM rust:bullseye AS builder
 RUN cargo install geph4-client
 
-# FROM debian:bullseye
+FROM debian:bullseye
 #RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-# COPY --from=builder /usr/local/cargo/bin/geph4-client /usr/local/bin/geph4-client
+COPY --from=builder /usr/local/cargo/bin/geph4-client /usr/local/bin/geph4-client
 RUN mkdir -p /root/.config/geph4-credentials
 RUN chmod 777 -R /root
 RUN mkdir -p ~/.config
